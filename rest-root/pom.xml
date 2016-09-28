@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+
+
+    <groupId>pl.com.sages</groupId>
+    <artifactId>rest-root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Szkolenia z REST - root</name>
+    <description>Wspólne ustawienia mavenowe</description>
+    <inceptionYear>2016</inceptionYear>
+
+    <modules>
+        <module>01-plain-http-srv</module>
+        <module>02-plain-http-clt</module>
+        <module>03-servlets</module>
+        <module>04-jaxb</module>
+        <module>05-jackson</module>
+        <module>07-apache</module>
+    </modules>
+
+    <organization>
+        <name>Sages</name>
+        <url>http://www.sages.com.pl/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Copyright Sages</name>
+            <url>http://www.sages.com.pl/</url>
+            <!-- <distribution>fake-repo</distribution> <comments></comments> -->
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>kkoziol</id>
+            <name>Krzysiek</name>
+            <email>k.koziol@sages.com.pl</email>
+            <organization>Sages</organization>
+            <organizationUrl>http://www.sages.com.pl</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <role>mavenizator, coding-ninja</role>
+            </roles>
+            <properties>
+                <picUrl>http://0.gravatar.com/avatar/c0eef6a3371b35bd35f36aa99bbb7d57</picUrl>
+                <twitter>@hippvs</twitter>
+            </properties>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Krzysztof Kozioł</name>
+            <email>k.koziol@sages.com.pl</email>
+            <organization>Sages</organization>
+            <organizationUrl>http://www.sages.com.pl</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <role>tester</role>
+                <role>quality control</role>
+            </roles>
+            <properties>
+                <picUrl>http://0.gravatar.com/avatar/c0eef6a3371b35bd35f36aa99bbb7d57</picUrl>
+                <twitter>@hippvs</twitter>
+            </properties>
+        </contributor>
+    </contributors>
+
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- JBoss dependency versions -->
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+
+        <!-- Define the version of the JBoss BOMs we want to import to specify tested stacks. -->
+        <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+        <v.maven-antrun-plugin>
+            1.8
+        </v.maven-antrun-plugin>
+        <v.maven-assembly-plugin>
+            2.5.5
+        </v.maven-assembly-plugin>
+        <v.maven-clean-plugin>
+            2.6.1
+        </v.maven-clean-plugin>
+        <v.maven-compiler-plugin>
+            3.3
+        </v.maven-compiler-plugin>
+        <v.maven-dependency-plugin>
+            2.10
+        </v.maven-dependency-plugin>
+        <v.maven-deploy-plugin>
+            2.8.2
+        </v.maven-deploy-plugin>
+        <v.maven-eclipse-plugin>
+            2.8
+        </v.maven-eclipse-plugin>
+        <v.maven-ejb-plugin>
+            2.5
+        </v.maven-ejb-plugin>
+        <v.maven-install-plugin>
+            2.5.2
+        </v.maven-install-plugin>
+        <v.maven-jar-plugin>
+            2.6
+        </v.maven-jar-plugin>
+        <v.maven-jxr-plugin>
+            2.5
+        </v.maven-jxr-plugin>
+        <v.maven-resources-plugin>
+            2.7
+        </v.maven-resources-plugin>
+        <v.maven-source-plugin>
+            2.4
+        </v.maven-source-plugin>
+        <v.maven-surefire-plugin>
+            2.18.1
+        </v.maven-surefire-plugin>
+        <v.maven-war-plugin>
+            2.6
+        </v.maven-war-plugin>
+        <v.build-helper-maven-plugin>
+            1.9.1
+        </v.build-helper-maven-plugin>
+        <v.versions-maven-plugin>
+            2.2
+        </v.versions-maven-plugin>
+        <v.maven-jaxb2-plugin>
+            0.12.3
+        </v.maven-jaxb2-plugin>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
+                of artifacts. We use this here so that we always get the correct versions of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can read this as the 
+                JBoss stack of the Java EE 7 APIs, with some extras tools for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate stack you can 
+                read this as the JBoss stack of the Java EE 7 APIs, with extras from the Hibernate family of projects) -->
+            <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-tools</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 
+            <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly</groupId>
+                <artifactId>wildfly-ejb-client-bom</artifactId>
+                <version>8.2.0.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+             -->
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${v.maven-antrun-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${v.maven-assembly-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${v.maven-clean-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${v.maven-compiler-plugin}</version>
+                    <configuration>
+                        <encoding>${maven.compiler.encoding}</encoding>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${v.maven-dependency-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${v.maven-deploy-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>${v.maven-ejb-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${v.maven-install-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${v.maven-jar-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${v.maven-resources-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${v.maven-source-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${v.maven-surefire-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${v.maven-war-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${v.build-helper-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${v.versions-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jvnet.jaxb2.maven2</groupId>
+                    <artifactId>maven-jaxb2-plugin</artifactId>
+                    <version>${v.maven-jaxb2-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>${v.maven-eclipse-plugin}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Facilitates downloading source and javadoc in Eclipse -->
+            <!-- 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
+             -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>
