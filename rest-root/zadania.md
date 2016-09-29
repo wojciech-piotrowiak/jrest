@@ -85,6 +85,22 @@
           i wyswietlającą zwróconego jsona na stronie lub w okienku alert. 
           **Hint:**(JQuery bedzie najwygodniejsze, zapewne)
                    
-### 06-
+### 06-jaxrs
+
+1. Klasę `Echo` podpięć pod scieżkę _/say_  
+1. Metodę `say(who)` podpiąć pod scieżkę GET i _/im/{who}_. Gdzie cześć urla _who_ będzie wstrzykiwana
+   do parametru metody
+1. Zadeplojować wara i potestować serwis wpisując ręcznie w url, a także ze strony _http://localhost:8080/06-jaxrs/index-echo.html_
+   Potestować ostatni człon urla ze spacją ;) (_../say/cos i cos_ i _.../say/cos i cos/a tu cos_)
+1. Metodę `say(who, howMany, agent)` podpiąć pod GET i tego samego urla co w punkcie 1.
+   `howMany` powinien być wstrzykiwany z parametru zawartego w url o nazwie `count`.
+   Parametr `agent` wypełniamy zawartością headera requestu `User-Agent`.
+   Parametr `count` powinen miec domyślna wartość ustawianą na 1.
+   - czy _polimorfizm REST_ zadziałał?
+   - czy usuniecie domyslnej wartości parametru `count` cos zmienia?
+   - Czy dodanie adnoacji `@Encoded` przed parametrem who coś zmienia w obsłudze spacji w url?
+1. Metodę `echo(who, what)` podpiąć pod POST i scieżkę _/{who}_.
+   Parametr `who` jest ustawiany z url, a parametr `what` jest pobierany z danych wyslanych z formularza (content posta).
+   
       
 ### 07-      
