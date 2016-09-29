@@ -29,12 +29,15 @@ import javax.ws.rs.core.Context;
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+@Path("/say")
 public class Echo {
 
 
-    public String say(String who,
-                      String howMany,
-                      String agent) {
+    @GET
+    @Path("/im/{who}")
+    public String say(@PathParam("who") @Encoded String who,
+                      @QueryParam("count")  String howMany,
+                      @HeaderParam("User-Agent") String agent) {
         System.out.println("Who=" + who);
         System.out.println("count=" + howMany);
         StringBuilder something = new StringBuilder();
@@ -47,13 +50,18 @@ public class Echo {
         }
         return "I'm knight who say : " + something.toString() + "!! and your browser is:" + agent;
     }
-
-    public String say(String who) {
+    
+    @GET
+    @Path("/im/{who}")
+    public String say(@PathParam("who") String who) {
         System.out.println("Who=" + who);
         return "I'm knight who say !: " + who + " z tej innej";
     }
 
-    public String echo(String who, String what) {
+
+    @POST
+    @Path("/{who}")
+    public String echo(@PathParam("who") String who, @FormParam("what") String what) {
         return "My name is " + who + " and I'm knight who say !: " + what;
     }
 
