@@ -40,7 +40,7 @@ public class CookieMonsterSerwlet extends HttpServlet {
                 kiedy = cookie.getValue();
             }
         }
-        // response.setHeader("Cache-Control", "no-cache");
+         response.setHeader("Cache-Control", "no-cache");
         if (!kiedy.equals("")) {
             response.getWriter().write("<message>Welcome again! Date and time of your last visit: " + kiedy + " </message>");
             cookie.setValue("" + new Date());

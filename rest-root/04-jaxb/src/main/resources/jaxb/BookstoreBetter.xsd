@@ -1,0 +1,50 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sages.com.pl/jrest/jaxb" xmlns="http://www.sages.com.pl/jrest/jaxb"
+    attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xs:element name="Bookstore">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Book" />
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Magazine" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Book">
+        <xs:complexType>
+            <xs:all>
+                <xs:element type="xs:string" name="Remark" maxOccurs="1" minOccurs="0" />
+                <xs:element type="xs:string" name="Title" />
+                <xs:element name="Authors" type="Authors" />
+            </xs:all>
+            <xs:attribute type="xs:string" name="ISBN" />
+            <xs:attribute type="xs:byte" name="Price" />
+            <xs:attribute type="xs:string" name="Edition" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Authors">
+        <xs:sequence maxOccurs="unbounded" minOccurs="1">
+            <xs:element ref="Author">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Author">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="First_Name" />
+                <xs:element type="xs:string" name="Last_Name" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Magazine">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="Title" />
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="Month" use="optional" />
+            <xs:attribute type="xs:short" name="Year" use="optional" />
+            <xs:attribute type="xs:string" name="ISBN" use="optional" />
+            <xs:attribute type="xs:byte" name="Price" use="optional" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
