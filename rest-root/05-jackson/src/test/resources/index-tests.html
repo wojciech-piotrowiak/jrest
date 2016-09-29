@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>My json servlet manual tests</title>
+</head>
+<body>
+	<script
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+		
+	</script>
+	<!--<script src="jquery.serializeJSON.min.js"></script>-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#simplepost").click(function(e) {
+				var formData = ConvertFormToJSON();
+				console.log(formData);
+				$.ajax({
+					type : 'POST',
+					url : 'http://localhost:8080/05-jackson/books',
+					dataType : 'json',
+					data : formData,
+					success : function(maindta) {
+						alert(JSON.stringify(maindta));
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+					}
+				});
+				e.preventDefault();
+			});
+		});
+		function ConvertFormToJSON(){
+		    var array = $("#myForm").serializeArray();
+		    var json = {};
+		    
+		    jQuery.each(array, function() {
+		        json[this.name] = this.value||'';
+		    });
+		    
+		    return JSON.stringify(json);
+		}		
+	</script>
+
+	<h2>By get</h2>
+	<form action="http://localhost:8080/05-jackson/books">
+		<input type="submit" value="Getnij" />
+	</form>
+
+
+	<h2>By Post</h2>
+	<form id="myForm" method="POST">
+	    <input type="hidden" name="type" value="Magazine" /><br />
+		Title:<input type="text" name="title" /><br /> 
+		Isbn :<input type="text" name="isbn" /><br /> 
+		Price:<input type="text" name="price" /><br /> 
+		Month:<input type="text" name="month" /><br />
+		Year :<input type="text" name="year" /><br /> 
+		
+		<input type="submit" value="Postnij" id="simplepost"/>
+	</form>
+
+</body>
+</html>
