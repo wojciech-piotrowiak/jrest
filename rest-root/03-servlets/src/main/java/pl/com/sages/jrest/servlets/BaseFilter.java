@@ -34,7 +34,7 @@ public class BaseFilter implements Filter, Serializable {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         LOG.info("We doFilter req={} resp={} chain={}", request, response, chain);
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        httpResponse.addHeader("Cache-Control", "no-store, no-cache, must-revalidate");
         httpResponse.addHeader("Cache-Control", "post-check=0, pre-check=0");
         httpResponse.setHeader("Expires", "Fri, 12 Oct 2007 01:00:00 GMT");
 
