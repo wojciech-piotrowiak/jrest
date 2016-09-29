@@ -37,7 +37,32 @@ public class XmlSerwlet extends HttpServlet {
 
         JAXBContext jaxbContext;
         try {
+            // response.setHeader("Content-Type", "text/xml");
+            response.setHeader("Content-Type", "text/xml; charset=utf-8");
+            response.setHeader("Content-Encoding", "UTF-8");
 
+            jaxbContext = JAXBContext.newInstance(Bookstore.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            InputStream is = JaxBPars.class.getResourceAsStream("Bookstore.xml");
+
+            Bookstore booktore = (Bookstore) unmarshaller.unmarshal(is);
+
+            // slabo
+            // JAXBContext jaxbContext2 =
+            // JAXBContext.newInstance(Magazine.class);
+            // Marshaller m2 = jaxbContext2.createMarshaller();
+            // m2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            // m2.setProperty("jaxb.fragment", true);
+            // m2.marshal(booktore.getMagazine().get(0), response.getWriter());
+            // m2.marshal(booktore.getMagazine().get(1), response.getWriter());
+
+            Marshaller m = jaxbContext.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            ObjectFactory of = new ObjectFactory();
+            Bookstore newBS = of.createBookstore();
+            newBS.getMagazine().addAll(booktore.getMagazine());
+            m.marshal(newBS, response.getWriter());
 
         } catch (JAXBException e) {
             // TODO Auto-generated catch block
