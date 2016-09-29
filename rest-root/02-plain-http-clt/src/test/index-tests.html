@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>My plain http server manual tests</title>
+</head>
+<body>    
+    <h2>By get - root</h2>
+    <form action="http://localhost:81/">
+        <input type="submit" value="Getnij" />
+    </form>
+    <h2>By Post - root </h2>
+    <form action="http://localhost:81/" method="post">
+        <input type="submit" value="Postnij" />
+    </form>
+
+    <h2>By get - with date</h2>
+    <form action="http://localhost:81/date">
+        <input type="text" name="format" value="YYYY/MM/DD" /> <input type="submit" value="Getnij" />
+        </br>
+        DD - dzien roku</br>
+        dd - dzien miesiaca</br>
+        ;)</br>
+        Sproboj z - zamiast /</br>
+        
+    </form>
+    <h2>By Post - with date </h2>
+    <form action="http://localhost:81/date" method="post">
+        <input type="text" name="format" value="YYYY/MM/DD"/> <input type="submit" value="Postnij" />
+    </form>
+
+</body>
+</html>
