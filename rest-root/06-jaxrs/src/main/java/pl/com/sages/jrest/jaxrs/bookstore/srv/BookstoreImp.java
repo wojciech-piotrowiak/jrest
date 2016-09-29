@@ -27,12 +27,22 @@ public class BookstoreImp implements BookstoreAPI {
     @Override
     public Collection<Book> getBooks() {
         Collection<Book> books = new ArrayList<>();
+        for (Item item : bookstore) {
+            if (item instanceof Book) {
+                books.add((Book) item);
+            }
+        }
         return books;
     }
 
     @Override
     public Collection<Magazine> getMagazines() {
         Collection<Magazine> magazines = new ArrayList<>();
+        for (Item item : bookstore) {
+            if (item instanceof Magazine) {
+                magazines.add((Magazine) item);
+            }
+        }
         return magazines;
     }
 
@@ -45,18 +55,38 @@ public class BookstoreImp implements BookstoreAPI {
     public Response getBook(String id) {
         Book book = null;
 
-        return null;
+        for (Item item : bookstore) {
+            if (item instanceof Book) {
+                book = (Book) item;
+                if (book.getIsbn().equals(id)) {
+                    return Response.status(200).entity(book).build();
+                }
+            }
+        }
+        return Response.status(404).entity("Nie ma takiej").build();
     }
 
     @Override
     public Book addBook(String id, String title) {
-        Book book = null;
+        Book book = new Book();
+        book.setIsbn(id);
+        book.setTitle(title);
+        bookstore.add(book);
         return book;
     }
 
     @Override
     public Book updateBook(String id, String title) {
         Book book = null;
+        for (Item item : bookstore) {
+            if (item instanceof Book) {
+                book = (Book) item;
+                if (book.getIsbn().equals(id)) {
+                    book.setTitle(title);
+                    return book;
+                }
+            }
+        }
         return null;
     }
 
@@ -64,6 +94,15 @@ public class BookstoreImp implements BookstoreAPI {
     public Response removeBook(String id) {
 
         Book book = null;
-        return null;
+        for (Item item : bookstore) {
+            if (item instanceof Book) {
+                book = (Book) item;
+                if (book.getIsbn().equals(id)) {
+                    bookstore.remove(book);
+                    return Response.status(200).entity(book).build();
+                }
+            }
+        }
+        return Response.status(404).entity("Nie ma takiej").build();
     }
 }
