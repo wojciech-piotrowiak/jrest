@@ -14,8 +14,9 @@ public class Jacek {
     public static void main(String[] args) throws IOException {
         // Wczytanie JSON do obiektu
         String json = "{\"type\":\"Book\", \"title\":\"Jacek i Placek\",\"isbn\":5}";
-
-        //System.out.println("wczytano:" + item);
+        ObjectMapper m = new ObjectMapper();
+        Item item = m.readValue(json, Item.class);
+        System.out.println("wczytano:" + item);
 
         // Zapisanie obiektu do JSON
         System.out.println("zapisano:");
@@ -24,14 +25,30 @@ public class Jacek {
         value.setMonth("10");
         value.setYear("2015");
         value.setTitle("Programista");
-        //System.out.println(out);
+        String out = m.writeValueAsString(value);
+        System.out.println(out);
 
-        //System.out.println("wczytano:" + item2);
+        ObjectMapper m2 = new ObjectMapper();
+        Bookstore item2 = m2.readValue(Jacek.class.getResourceAsStream("Bookstore.json"), Bookstore.class);
+        System.out.println("wczytano:" + item2);
 
         // Utworzenie "reczne"(strumieniowe) JSON i zapisanie
         System.out.println("zapisano strumieniowo:");
-//        g.writeEndObject();
-//        g.close();
+        JsonFactory f = new JsonFactory();
+        JsonGenerator g = f.createJsonGenerator(System.out);
+        g.writeStartObject();
+        g.writeStringField("title", "Jacek i Placek");
+        g.writeNumberField("isbn", 5);
+        g.writeArrayFieldStart("authors");
+        g.writeStartObject();
+        g.writeStringField("name", "Jacek");
+        g.writeEndObject();
+        g.writeStartObject();
+        g.writeStringField("name", "Placek");
+        g.writeEndObject();
+        g.writeEndArray();
+        g.writeEndObject();
+        g.close();
 
     }
 }
