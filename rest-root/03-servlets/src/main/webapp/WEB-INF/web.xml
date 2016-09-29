@@ -20,7 +20,6 @@
     <filter-mapping>
         <filter-name>BaseFilter2</filter-name>
         <url-pattern>/*</url-pattern>
-        <url-pattern>*.jsf</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -30,8 +29,8 @@
     <filter-mapping>
         <filter-name>BaseFilter</filter-name>
         <url-pattern>/*</url-pattern>
-        <url-pattern>*.jsf</url-pattern>
     </filter-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -41,16 +40,13 @@
         <web-resource-collection>
             <web-resource-name>HTML</web-resource-name>
             <url-pattern>*.html</url-pattern>
+            <http-method>GET</http-method>
         </web-resource-collection>
 
         <auth-constraint/>
-    </security-constraint>
-    <security-constraint>
-        <display-name>Restrict something</display-name>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
-        <auth-constraint/>
     </security-constraint>
 
     <error-page>
