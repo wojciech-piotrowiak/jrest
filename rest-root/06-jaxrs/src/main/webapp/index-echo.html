@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>getem</h2>
+    <form action="http://localhost:8080/jaxrs/rest/say/im/aqq">
+        <input type="text" name="cos" value="2" /> <input type="submit" value="Getnij" />
+    </form>
+    <h2>Postem</h2>
+    <form action="http://localhost:8080/jaxrs/rest/say/NI" method="post">
+        <input type="text" name="what" /> <input type="submit" value="Postnij" />
+    </form>
+
+    <h2>Wyslij obrazek</h2>
+    <form action="http://localhost:8080/jaxrs/rest/say/upload" method="post" enctype="multipart/form-data">
+        Wybiez plika: <input type="file" name="file" size="50" /> 
+        <input type="submit" value="No zaladuj tego plika" />
+    </form>
+</body>
+</html>
