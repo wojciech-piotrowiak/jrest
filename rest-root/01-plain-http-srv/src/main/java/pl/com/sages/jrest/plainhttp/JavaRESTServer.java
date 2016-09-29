@@ -6,14 +6,23 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /*
- * Zadanie:
- * 1. Zmianić program by reagował na scieżkę /date i zwracał klientowi dodatkow aktualną datę serwera
- * 2. Dodać obsługę parametru (metody GET) o nazwie format, aby klient mogł okreslić jak ma wygladać odpowiedź.
- *    Hint,przyda się StringBuffer oraz metody split i contains z klasy String ;)
+ * Problemy:
+ * - wszystko ręcznie
+ * - parsowanie..
+ * - mało czytelnie
+ * - łatwo o błędy
+ * - raj dla hackerów
+ * - i co jeszcze?
+ *
+ * popróbować ze spacjami i innymi złymi formatami
+ *
+ * Wnioski?
  */
 public class JavaRESTServer {
 
@@ -40,6 +49,8 @@ public class JavaRESTServer {
             BufferedReader in;
             PrintWriter out;
             String request;
+            Boolean showDate = false;
+            String format = "";
 
             String webServerAddress = s.getInetAddress().toString();
             System.out.println("New Connection:" + webServerAddress);
@@ -48,6 +59,19 @@ public class JavaRESTServer {
             request = in.readLine();
             while (request != null && !request.equals("")) {
                 System.out.println("--- Client request: " + request);
+                if (request.contains("/date")) {
+                    showDate = true;
+                    if (request.contains("?format=")) {
+                        String[] strings = request.split("[?=\\s]");
+                        for (int i = 0; i < strings.length; i++) {
+                            System.out.println(strings[i]);
+                            if (strings[i].contains("format")) {
+                                format = strings[i + 1];
+                            }
+                        }
+                        System.out.println("Found format: " + format);
+                    }
+                }
                 request = in.readLine();
             }
 
@@ -55,7 +79,24 @@ public class JavaRESTServer {
             out.println("HTTP/1.1 200");
             out.println("Content-type: text/html");
             out.println("Server-name: myRESTserver");
-            String response = "<html>\n" + "<head>\n" + "<title>My REST Server</title></head>\n" + "<h1>Hello from My REST Server!</h1>\n" + "</html>\n";
+            StringBuffer responseBuffer = new StringBuffer();
+            responseBuffer.append("<html>\n");
+            responseBuffer.append("<head>\n");
+            responseBuffer.append("<title>My REST Server</title></head>\n");
+            responseBuffer.append("<body>");
+            responseBuffer.append("<h1>Hello from My REST Server!</h1>\n");
+            if (showDate) {
+                responseBuffer.append("<h3> Current server date:");
+                if (format.equals("")) {
+                    responseBuffer.append(new Date());
+                } else {
+                    responseBuffer.append(new SimpleDateFormat(format).format(new Date()));
+                }
+                responseBuffer.append("</h3>\n");
+            }
+            responseBuffer.append("</body>\n");
+            responseBuffer.append("</html>\n");
+            String response = responseBuffer.toString();
             out.println("Content-length: " + response.length());
             out.println("");
             out.println(response);
@@ -75,5 +116,4 @@ public class JavaRESTServer {
         }
         return;
     }
-
 }

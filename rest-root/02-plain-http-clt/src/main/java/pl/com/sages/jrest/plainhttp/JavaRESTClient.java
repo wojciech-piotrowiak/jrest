@@ -14,10 +14,10 @@ import java.net.URL;
 
 public class JavaRESTClient {
 
-    public static void invoke() {
+    public static void invoke(String format) {
         HttpURLConnection connection = null;
         try {
-            URL url = new URL("http://localhost:81/date");
+            URL url = new URL("http://localhost:81/date?format="+format);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setDoInput(true);
@@ -48,7 +48,7 @@ public class JavaRESTClient {
 
     public static void main(String[] args) {
 
-        JavaRESTClient.invoke();
+        JavaRESTClient.invoke("YYYY");
     }
 
 }
