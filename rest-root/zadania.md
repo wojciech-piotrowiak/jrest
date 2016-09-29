@@ -102,5 +102,15 @@
 1. Metodę `echo(who, what)` podpiąć pod POST i scieżkę _/{who}_.
    Parametr `who` jest ustawiany z url, a parametr `what` jest pobierany z danych wyslanych z formularza (content posta).
 1. Przerobić metody by zwracaly obiekt klasy `Response`.   
-2. df      
+2. Piszemy CRUDA dla naszego Bookstore
+      - BookstoreAPI (interfejs) ogolnie to produkuje jsona i mapowane jest pod /bookstore
+      - getBooks() - /books
+      - getMagazines() - /magazines i produkuje text/plain
+      - getItems() - /items i produkuje xml (moze byc tez gzipowane i keszowane)
+      - getBook(id) - /books/isbn
+      - addBook(id, title) - /books/isbn?title=cos...
+      - updateBook(id,title) - /books/isbna?title=cosinnego...
+      - removeBook(id) - /books/isbn
+2. Piszemy iplementacje BookstoreImp
+2. W miedzy czasie sobie testujemy, co sie da... ;)
 ### 07-      
