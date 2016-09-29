@@ -202,9 +202,4 @@
             </build>
         </profile>
     </profiles>
-    
-    
-    <!-- na problem z clean! -->
-    <!-- clean package wildfly:deploy -->
-    <!-- http://stackoverflow.com/questions/14659891/m2e-wtp-error-path-target-m2e-wtp-web-resources-meta-inf-manifest-mf-no-such -->    
 </project>
