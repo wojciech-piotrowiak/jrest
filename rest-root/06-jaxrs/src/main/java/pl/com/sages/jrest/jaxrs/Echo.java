@@ -21,6 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.MultivaluedMap;
 //import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.ResponseBuilder;
@@ -35,7 +36,7 @@ public class Echo {
 
     @GET
     @Path("/im/{who}")
-    public String say(@PathParam("who") @Encoded String who,
+    public Response say(@PathParam("who") @Encoded String who,
                       @QueryParam("count")  String howMany,
                       @HeaderParam("User-Agent") String agent) {
         System.out.println("Who=" + who);
@@ -48,21 +49,21 @@ public class Echo {
                 something.append(who);
             }
         }
-        return "I'm knight who say : " + something.toString() + "!! and your browser is:" + agent;
+        return Response.ok("I'm knight who say : " + something.toString() + "!! and your browser is:" + agent).build();
     }
     
     @GET
     @Path("/im/{who}")
-    public String say(@PathParam("who") String who) {
+    public Response say(@PathParam("who") String who) {
         System.out.println("Who=" + who);
-        return "I'm knight who say !: " + who + " z tej innej";
+        return Response.ok("I'm knight who say !: " + who + " z tej innej").build();
     }
 
 
     @POST
     @Path("/{who}")
-    public String echo(@PathParam("who") String who, @FormParam("what") String what) {
-        return "My name is " + who + " and I'm knight who say !: " + what;
+    public Response echo(@PathParam("who") String who, @FormParam("what") String what) {
+        return Response.ok("My name is " + who + " and I'm knight who say !: " + what).build();
     }
 
 }
