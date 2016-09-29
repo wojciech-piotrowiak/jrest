@@ -101,6 +101,6 @@
    - Czy dodanie adnoacji `@Encoded` przed parametrem who coś zmienia w obsłudze spacji w url?
 1. Metodę `echo(who, what)` podpiąć pod POST i scieżkę _/{who}_.
    Parametr `who` jest ustawiany z url, a parametr `what` jest pobierany z danych wyslanych z formularza (content posta).
-   
-      
+1. Przerobić metody by zwracaly obiekt klasy `Response`.   
+2. df      
 ### 07-      
