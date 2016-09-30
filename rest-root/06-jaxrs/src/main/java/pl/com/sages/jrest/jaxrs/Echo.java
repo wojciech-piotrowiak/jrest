@@ -39,7 +39,7 @@ import org.jboss.resteasy.annotations.GZIP;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
-@Path("/say")
+@Path("/")
 public class Echo {
 
     @Context
@@ -47,7 +47,7 @@ public class Echo {
 
 
 
-	 @Path("/{who}/{howMany}")
+	@Path("/say/{who}/{howMany}")
 	 @GET @GZIP
     public Response say(@PathParam("who") @DefaultValue("John snow") String who,
     		@PathParam("howMany") String howMany,
@@ -65,18 +65,20 @@ public class Echo {
         return Response.accepted("I'm knight who say : " + something.toString() + "!! and your browser is:" + agent).build();
     }
 
-	 @Path("/{who}")
+	 @Path("/say/{who}")
 	 @GET
     public String say(@PathParam("who") @Encoded String who) {
         System.out.println("Who=" + who);
         return "I'm knight who say !: " + who + " z tej innej";
     }
+	 
+	 @Path("/say")
+	 @GET
+	    public Response echo(@MatrixParam("who") @DefaultValue("John snow") String who,@MatrixParam("what") String what) {
+	        return Response.ok("My name is " + who + " and I'm knight who say !: " + what).build();
+	    }
     
    
-    @GET
-    public Response echo(@MatrixParam("who") @DefaultValue("John snow") String who,@MatrixParam("what") String what) {
-        return Response.ok("My name is " + who + " and I'm knight who say !: " + what).build();
-    }
     
     
 
@@ -85,7 +87,7 @@ public class Echo {
     @Produces("image/png")
     public Response getFile() {
 
-        File file = new File("C:\\Java\\wrsp_JRest\\rest-root\\06-jaxrs\\src\\main\\webapp\\logo.png");
+        File file = new File("C:\\Users\\Administrator\\Documents\\jrest\\rest-root\\06-jaxrs\\src\\main\\webapp\\logo.png");
         ResponseBuilder response = Response.ok(file);
         response.header("Content-Disposition", "attachment; filename=sages-logo.png");
         return response.build();
@@ -147,6 +149,9 @@ public class Echo {
         return Response.status(200).entity("Zaladowalem : " + fileName).build();
 
     }
+    
+   
+    
 
     /**
      * Content-Disposition: form-data; name="file"; filename="aaa.PNG"

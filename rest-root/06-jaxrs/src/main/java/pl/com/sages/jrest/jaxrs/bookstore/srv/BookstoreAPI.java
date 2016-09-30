@@ -62,12 +62,9 @@ public interface BookstoreAPI {
             @ApiParam(value = "podaj isbna", required = true)
             @Size(min = 1, max = 3)
             @PathParam("isbn") String id,
-<<<<<<< HEAD
-            @ApiParam(value = "podaj title", required = false)
-=======
+
             @ApiParam(value = "podaj title", required = true)
             @NotNull
->>>>>>> b394d31c7f4a092eb3398e758756a95177cc870a
             @QueryParam("title") String title) ;
 
     @PUT
