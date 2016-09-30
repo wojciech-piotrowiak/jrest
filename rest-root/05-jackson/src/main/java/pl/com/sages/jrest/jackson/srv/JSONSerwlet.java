@@ -23,12 +23,7 @@ public class JSONSerwlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setHeader("Content-Type", "text/json; charset=utf-8");
 		response.setHeader("Content-Encoding", "UTF-8");
-
-		List<Magazine> subList = BookStoreBase.getMagazines();
-
-		String valueAsString = "";
-		response.getWriter().write(valueAsString);
-
+		response.getWriter().write(BookStoreBase.getMagazines().toString());
 	}
 
 	@Override
@@ -52,7 +47,7 @@ public class JSONSerwlet extends HttpServlet {
 
 			BookStoreBase.addMagazine(magazine);
 			
-			String valueAsString = "";
+			String valueAsString =BookStoreBase.getMagazines().toString();
 			System.out.println("Odsyłam: "+valueAsString);
 			response.getWriter().write(valueAsString);
 		} else {

@@ -20,10 +20,12 @@ public class BookStoreBase {
 	}
 
 	static {
-		ObjectMapper maper = new ObjectMapper();
-
+		 ObjectMapper m2 = new ObjectMapper();
 		try {
-             throw new IOException();
+			    bookstore = m2.readValue(Jacek.class.getResourceAsStream("Bookstore.json"), Bookstore.class);
+			   items=new ArrayList<Item>();
+			   items.addAll(bookstore.getItems());
+			 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
