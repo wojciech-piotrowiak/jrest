@@ -1,8 +1,6 @@
 package pl.com.sages.jrest.jaxrs.bookstore.srv;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import pl.com.sages.jrest.jaxrs.bookstore.Book;
 import pl.com.sages.jrest.jaxrs.bookstore.Item;
 import pl.com.sages.jrest.jaxrs.bookstore.Magazine;
@@ -51,9 +49,10 @@ public interface BookstoreAPI {
     @GET
     @Path("/books/{isbn}")
     @ApiOperation(value = "Zwraca ksiazke po isbn", notes = "Zwraca ksiazke albo byka", response = Book.class)
-    //    @ApiResponses({ @ApiResponse(code = 404, message = "Nie ma takiej") })
+    @ApiResponses({ @ApiResponse(code = 404, message = "Nie ma takiej") })
     public Response getBook(
             @ApiParam(value = "podaj isbna", required = false)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id) ;
 
     @POST
@@ -61,8 +60,14 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Dodaje nowa knige", notes = "Trzeba podac isbn i title", response = Book.class)
     public Book addBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id,
+<<<<<<< HEAD
             @ApiParam(value = "podaj title", required = false)
+=======
+            @ApiParam(value = "podaj title", required = true)
+            @NotNull
+>>>>>>> b394d31c7f4a092eb3398e758756a95177cc870a
             @QueryParam("title") String title) ;
 
     @PUT
@@ -70,8 +75,10 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Zmienia tytul knidze", notes = "Trzeba podac isbn i title", response = Book.class)
     public Book updateBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id,
             @ApiParam(value = "podaj title", required = true)
+            @NotNull
             @FormParam("title") String title) ;
 
     @DELETE
@@ -79,5 +86,7 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Usuwa knige ze stora", notes = "Trzeba podac isbn", response = Response.class)
     public Response removeBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
+            @NotNull
             @PathParam("isbn") String id) ;
 }
