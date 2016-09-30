@@ -1,8 +1,6 @@
 package pl.com.sages.jrest.jaxrs.bookstore.srv;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import pl.com.sages.jrest.jaxrs.bookstore.Book;
 import pl.com.sages.jrest.jaxrs.bookstore.Item;
 import pl.com.sages.jrest.jaxrs.bookstore.Magazine;
@@ -48,7 +46,7 @@ public interface BookstoreAPI {
     @GET
     @Path("/books/{isbn}")
     @ApiOperation(value = "Zwraca ksiazke po isbn", notes = "Zwraca ksiazke albo byka", response = Book.class)
-    //    @ApiResponses({ @ApiResponse(code = 404, message = "Nie ma takiej") })
+    @ApiResponses({ @ApiResponse(code = 404, message = "Nie ma takiej") })
     public Response getBook(
             @ApiParam(value = "podaj isbna", required = false)
             @PathParam("isbn") String id) ;
