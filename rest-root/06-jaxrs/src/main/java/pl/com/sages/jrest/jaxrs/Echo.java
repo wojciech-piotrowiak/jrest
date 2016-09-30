@@ -22,11 +22,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+
 //import javax.ws.rs.core.MultivaluedMap;
 //import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.ResponseBuilder;
 
-//import org.jboss.resteasy.annotations.GZIP;
+
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -43,15 +44,19 @@ public class Echo {
         System.out.println("count=" + howMany);
         StringBuilder something = new StringBuilder();
         something.append(who);
-        if (howMany != null) {
-            for (int i = 1; i < Integer.parseInt(howMany); i++) {
-                something.append(" ");
-                something.append(who);
+        try {
+            if (howMany != null) {
+                for (int i = 1; i < Integer.parseInt(howMany); i++) {
+                    something.append(" ");
+                    something.append(who);
+                }
             }
+        }catch (Exception e){
+            return Response.status(400).entity("Zły int").language("pl").header("Content-Type", "text/json; charset=utf-8").encoding("UTF-8").build();
         }
         return Response.ok("I'm knight who say : " + something.toString() + "!! and your browser is:" + agent).build();
     }
-    
+
     @GET
     @Path("/im/{who}")
     public Response say(@PathParam("who") String who) {
