@@ -49,6 +49,7 @@ public interface BookstoreAPI {
     @ApiResponses({ @ApiResponse(code = 404, message = "Nie ma takiej") })
     public Response getBook(
             @ApiParam(value = "podaj isbna", required = false)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id) ;
 
     @POST
@@ -56,8 +57,10 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Dodaje nowa knige", notes = "Trzeba podac isbn i title", response = Book.class)
     public Book addBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id,
             @ApiParam(value = "podaj title", required = true)
+            @NotNull
             @QueryParam("title") String title) ;
 
     @PUT
@@ -65,8 +68,10 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Zmienia tytul knidze", notes = "Trzeba podac isbn i title", response = Book.class)
     public Book updateBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
             @PathParam("isbn") String id,
             @ApiParam(value = "podaj title", required = true)
+            @NotNull
             @FormParam("title") String title) ;
 
     @DELETE
@@ -74,5 +79,7 @@ public interface BookstoreAPI {
     @ApiOperation(value = "Usuwa knige ze stora", notes = "Trzeba podac isbn", response = Response.class)
     public Response removeBook(
             @ApiParam(value = "podaj isbna", required = true)
+            @Size(min = 1, max = 3)
+            @NotNull
             @PathParam("isbn") String id) ;
 }
