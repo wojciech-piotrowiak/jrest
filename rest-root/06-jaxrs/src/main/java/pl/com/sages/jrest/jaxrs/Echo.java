@@ -8,6 +8,8 @@ package pl.com.sages.jrest.jaxrs;
 //import java.util.List;
 //import java.util.Map;
 
+import org.jboss.resteasy.annotations.GZIP;
+
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
@@ -37,6 +39,7 @@ public class Echo {
 
     @GET
     @Path("/im/{who}")
+    @GZIP
     public Response say(@PathParam("who") @Encoded String who,
                       @QueryParam("count")  String howMany,
                       @HeaderParam("User-Agent") String agent) {
