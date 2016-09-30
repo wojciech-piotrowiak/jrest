@@ -1,0 +1,17 @@
+{"items":[
+        "isbn":"ISBN-0-13-713526-2",
+        "price":"85", 
+        "edition":"3rd",
+        "title":"W Pustyni i w Puszczy",
+        "authors":[{"firstName":"Henryk", "lastName":"Sienkiewicz"}]
+},
+        "isbn":"ISBN-0-13-815504-6",
+        "price":"100",
+        "remark":"Buy this book bundled with 'A First Course' - a great deal!",
+        "title":"Database Systems: The Complete Book",
+        "authors":[{"firstName":"Hector", "lastName":"Garcia-Molina"}, {"firstName":"Jeffrey", "lastName":"Ullman"},{"firstName":"Jennifer", "lastName":"Widom"}]
+},
+{"month":"9", "year":"2016", "price":"22", "title":"Żagle"},
+{"month":"1", "year":"2015", "isbn":"ISBN-0-13-815504-8", "title":"Programista"},
+{"month":"2", "year":"2015", "price":"12", "title":"Programista"}
+]}
