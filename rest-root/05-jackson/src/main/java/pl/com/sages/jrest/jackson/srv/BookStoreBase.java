@@ -23,7 +23,8 @@ public class BookStoreBase {
 		ObjectMapper maper = new ObjectMapper();
 
 		try {
-             throw new IOException();
+			bookstore = maper.readValue(Jacek.class.getResourceAsStream("Bookstore.json"), Bookstore.class);
+			items = bookstore.getItems();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

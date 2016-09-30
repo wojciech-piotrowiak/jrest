@@ -25,8 +25,9 @@ public class JSONSerwlet extends HttpServlet {
 		response.setHeader("Content-Encoding", "UTF-8");
 
 		List<Magazine> subList = BookStoreBase.getMagazines();
+		ObjectMapper om = new ObjectMapper();
+		String valueAsString = om.writeValueAsString(subList);
 
-		String valueAsString = "";
 		response.getWriter().write(valueAsString);
 
 	}
@@ -36,27 +37,26 @@ public class JSONSerwlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setHeader("Content-Type", "text/json; charset=utf-8");
 		response.setHeader("Content-Encoding", "UTF-8");
-
+		response.setHeader("Access-Control-Allow-Origin","*");
 
 		BufferedReader reader = request.getReader();
 		String line = "";
 		String result = "";
 		while ((line = reader.readLine()) != null) {
-			result = line;
+			result = java.net.URLDecoder.decode(line, "UTF-8");
 			System.out.println("Zdekodowany request" + result);
 		}
 		if (!result.equals("")) {
 			ObjectMapper om = new ObjectMapper();
-			Magazine magazine = null;
+			Magazine magazine = om.readValue(result, Magazine.class);
 			System.out.println("wczytano:" + magazine);
 
 			BookStoreBase.addMagazine(magazine);
 			
-			String valueAsString = "";
+			String valueAsString = om.writeValueAsString(BookStoreBase.getMagazines());
 			System.out.println("Odsyłam: "+valueAsString);
 			response.getWriter().write(valueAsString);
 		} else {
-			//troche lipnie ;)
 			response.getWriter().write("500");
 		}
 
