@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.ResponseBuilder;
 
-//import org.jboss.resteasy.annotations.GZIP;
+import org.jboss.resteasy.annotations.GZIP;
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -42,7 +42,7 @@ public class Echo {
 
 
 	 @Path("/{who}/{howMany}")
-	 @GET
+	 @GET @GZIP
     public Response say(@PathParam("who") @DefaultValue("John snow") String who,
     		@PathParam("howMany") String howMany,
                     @HeaderParam("User-Agent")  String agent) {
