@@ -113,4 +113,6 @@
       - removeBook(id) - /books/isbn
 2. Piszemy iplementacje BookstoreImp
 2. W miedzy czasie sobie testujemy, co sie da... ;)
+
+https://github.com/swagger-api/swagger-core/wiki/Swagger-Core-JAX-RS-Project-Setup-1.5.X
 ### 07-      

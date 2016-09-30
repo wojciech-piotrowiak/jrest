@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+@XmlRootElement
 public class Item {
 
     protected String title;
