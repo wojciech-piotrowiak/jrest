@@ -22,6 +22,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.annotations.GZIP;
+
 @Path("/bookstore")
 @Api(value = "/bookstore", description="Costam z ksiegarnia")
 @Produces({ "application/json" })
@@ -30,19 +32,20 @@ public interface BookstoreAPI {
 
     @GET
     @Path("/books")
-    @ApiOperation(value = "Zwraca wszystkie ksiazki w storze", notes = "Zwraca liste książek", response = Book.class, responseContainer = "list")
+    @ApiOperation(value = "Zwraca wszystkie ksiazki", notes = "Zwraca liste książek", response = Book.class, responseContainer = "list")
     public Collection<Book> getBooks();
 
     @GET
     @Path("/magazines")
     @Produces("text/plain")
-    @ApiOperation(value = "Zwraca wszystkie magazyny w storze", notes = "Zwraca liste magazynow", response = Magazine.class, responseContainer = "list")
+    @ApiOperation(value = "Zwraca wszystkie magazyny ", notes = "Zwraca liste magazynow", response = Magazine.class, responseContainer = "list")
     public Collection<Magazine> getMagazines() ;
 
     @GET
-    @Produces({ "application/xml" })//@GZIP @Cache
+    @Produces({ "application/xml" })
+    @GZIP 
     @Path("/items")
-    @ApiOperation(value = "Zwraca wszystko w storze", notes = "Zwraca liste całego stora", response = Item.class, responseContainer = "list" )
+    @ApiOperation(value = "Zwraca wszystko ", notes = "Zwraca liste całego stora", response = Item.class, responseContainer = "list" )
     public Collection<Item> getItems() ;
 
     @GET
@@ -59,7 +62,7 @@ public interface BookstoreAPI {
     public Book addBook(
             @ApiParam(value = "podaj isbna", required = true)
             @PathParam("isbn") String id,
-            @ApiParam(value = "podaj title", required = true)
+            @ApiParam(value = "podaj title", required = false)
             @QueryParam("title") String title) ;
 
     @PUT
