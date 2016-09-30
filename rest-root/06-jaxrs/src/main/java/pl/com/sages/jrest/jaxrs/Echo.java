@@ -21,6 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.MultivaluedMap;
 //import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.ResponseBuilder;
@@ -29,12 +30,15 @@ import javax.ws.rs.core.Context;
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+@Path("/say")
 public class Echo {
 
 
-    public String say(String who,
-                      String howMany,
-                      String agent) {
+    @GET
+    @Path("/im/{who}")
+    public Response say(@PathParam("who") @Encoded String who,
+                      @QueryParam("count")  String howMany,
+                      @HeaderParam("User-Agent") String agent) {
         System.out.println("Who=" + who);
         System.out.println("count=" + howMany);
         StringBuilder something = new StringBuilder();
@@ -45,16 +49,21 @@ public class Echo {
                 something.append(who);
             }
         }
-        return "I'm knight who say : " + something.toString() + "!! and your browser is:" + agent;
+        return Response.ok("I'm knight who say : " + something.toString() + "!! and your browser is:" + agent).build();
     }
-
-    public String say(String who) {
+    
+    @GET
+    @Path("/im/{who}")
+    public Response say(@PathParam("who") String who) {
         System.out.println("Who=" + who);
-        return "I'm knight who say !: " + who + " z tej innej";
+        return Response.ok("I'm knight who say !: " + who + " z tej innej").build();
     }
 
-    public String echo(String who, String what) {
-        return "My name is " + who + " and I'm knight who say !: " + what;
+
+    @POST
+    @Path("/{who}")
+    public Response echo(@PathParam("who") String who, @FormParam("what") String what) {
+        return Response.ok("My name is " + who + " and I'm knight who say !: " + what).build();
     }
 
 }
