@@ -15,12 +15,15 @@ import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.MatrixParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
 //import javax.ws.rs.core.MultivaluedMap;
 //import javax.ws.rs.core.Response;
 //import javax.ws.rs.core.Response.ResponseBuilder;
@@ -29,12 +32,20 @@ import javax.ws.rs.core.Context;
 //import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 //import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+@Path("/say")
 public class Echo {
 
+	 @GET
+	    public Response say() {
+	        return Response.ok("I'm knight who say ").build();
+	    }
 
-    public String say(String who,
-                      String howMany,
-                      String agent) {
+
+	 @Path("/{who}/{howMany}")
+	 @GET
+    public Response say(@PathParam("who") @DefaultValue("John snow") String who,
+    		@PathParam("howMany") String howMany,
+                    @HeaderParam("User-Agent")  String agent) {
         System.out.println("Who=" + who);
         System.out.println("count=" + howMany);
         StringBuilder something = new StringBuilder();
@@ -45,16 +56,22 @@ public class Echo {
                 something.append(who);
             }
         }
-        return "I'm knight who say : " + something.toString() + "!! and your browser is:" + agent;
+        return Response.accepted("I'm knight who say : " + something.toString() + "!! and your browser is:" + agent).build();
     }
 
-    public String say(String who) {
+	 @Path("/{who}")
+	 @GET
+    public String say(@PathParam("who") @Encoded String who) {
         System.out.println("Who=" + who);
         return "I'm knight who say !: " + who + " z tej innej";
     }
-
-    public String echo(String who, String what) {
-        return "My name is " + who + " and I'm knight who say !: " + what;
+    
+   
+    @GET
+    public Response echo(@MatrixParam("who") @DefaultValue("John snow") String who,@MatrixParam("what") String what) {
+        return Response.ok("My name is " + who + " and I'm knight who say !: " + what).build();
     }
+    
+    
 
 }
