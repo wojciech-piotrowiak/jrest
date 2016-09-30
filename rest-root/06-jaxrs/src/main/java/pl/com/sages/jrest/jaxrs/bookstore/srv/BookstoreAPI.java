@@ -22,26 +22,44 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+@Path("/bookstore")
+@Produces({ "application/json" })
 public interface BookstoreAPI {
 
 
+    @GET
+    @Path("/books")
     public Collection<Book> getBooks();
 
+    @GET
+    @Path("/magazines")
+    @Produces("text/plain")
     public Collection<Magazine> getMagazines() ;
 
+    @GET
+    @Produces({ "application/xml" })//@GZIP @Cache
+    @Path("/items")
     public Collection<Item> getItems() ;
 
+    @GET
+    @Path("/books/{isbn}")
     public Response getBook(
-            String id) ;
+            @PathParam("isbn") String id) ;
 
+    @POST
+    @Path("/books/{isbn}")
     public Book addBook(
-            String id,
-            String title) ;
+            @PathParam("isbn") String id,
+            @QueryParam("title") String title) ;
 
+    @PUT
+    @Path("/books/{isbn}")
     public Book updateBook(
-            String id,
-            String title) ;
+            @PathParam("isbn") String id,
+            @FormParam("title") String title) ;
 
+    @DELETE
+    @Path("/books/{isbn}")
     public Response removeBook(
-            String id) ;
+            @PathParam("isbn") String id) ;
 }
